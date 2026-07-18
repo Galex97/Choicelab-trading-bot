@@ -1,0 +1,100 @@
+# ============================================================
+# 东方财富A股争霸赛 - 自动交易机器人配置
+# ============================================================
+
+# 交易时间段配置
+trading_hours:
+  morning:
+    start: "09:25"
+    end: "11:30"
+  afternoon:
+    start: "13:00"
+    end: "15:00"
+  # 盘前分析提前量（分钟）
+  pre_market_minutes: 10
+
+# 策略参数
+strategy:
+  # 止损线（百分比，负数）
+  stop_loss: -5.0
+  # 止盈线（百分比）
+  take_profit: 8.0
+  # 单只股票最大仓位占比
+  max_position_ratio: 0.5
+  # 最大持仓股票数
+  max_stocks: 3
+  # 策略权重配置
+  weights:
+    momentum: 0.4
+    leader_stock: 0.35
+    breakout: 0.25
+
+# 运行模式
+mode:
+  # 人工审核模式（true=每笔交易需确认，false=全自动）
+  review_mode: true
+  # 检查间隔（分钟）
+  check_interval_minutes: 5
+  # 是否启用AI顾问
+  enable_ai_advisor: true
+
+# 浏览器配置
+browser:
+  # 是否显示浏览器界面（调试时设为true）
+  headless: false
+  # 页面加载超时（毫秒）
+  timeout: 30000
+  # Cookie保存路径
+  cookie_path: "config/cookies.json"
+  # 截图保存路径
+  screenshot_dir: "logs/screenshots"
+
+# 日志配置
+logging:
+  # 日志文件目录
+  log_dir: "logs"
+  # 日志级别: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  # 日志保留天数
+  retention_days: 30
+
+# ============================================================
+# 风控护栏参数（对应 core/risk.py 的 RiskRules）
+# 三 Agent 整合模式（--agent-advice）也受此参数约束
+# ============================================================
+risk:
+  # 单只股票最大仓位占总资产比（比赛规则 ≤1/3）
+  max_single_position_ratio: 0.33
+  # 总持仓最大占比
+  max_total_position_ratio: 0.70
+  # 最低现金保留比例（比赛规则 ≥30%）
+  min_cash_ratio: 0.30
+  # 最多持仓股票数
+  max_positions: 6
+  # 单笔最少买入股数（主板最小手）
+  min_buy_amount: 100
+  # 手数单位
+  lot_size: 100
+  # 科创板最少买入股数
+  star_market_min_buy: 200
+  # 是否允许创业板（30xxxx）
+  allow_chinext: true
+  # 是否允许科创板（68xxxx）
+  allow_star_market: true
+  # 是否允许北交所（4/8/92xxxx）
+  allow_beijing: false
+
+# ============================================================
+# 三 Agent 整合模式（--agent-advice）
+# ============================================================
+agent_advice:
+  # advice.json 默认路径（相对项目根目录的上级，即 ../advice.json）
+  default_advice_path: "../advice.json"
+  # 执行前是否强制弹出人工审核确认
+  force_review: true
+
+# 目标网站
+urls:
+  main_page: "https://choicelab.eastmoney.com/mainPage"
+  login_page: "https://choicelab.eastmoney.com/mainPage"
+  competition_page: "https://choicelab.eastmoney.com"

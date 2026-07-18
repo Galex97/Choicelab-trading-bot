@@ -1,0 +1,68 @@
+# Claude Code personal settings
+.claude/
+
+# Python virtual environment
+new_trading_bot/venv/
+
+# Sensitive config
+.env
+new_trading_bot/config/.env
+new_trading_bot/config/cookies.json
+
+# Runtime logs
+new_trading_bot/logs/
+
+# Runtime output (positions, account snapshots, trade results)
+new_trading_bot/output/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Unused SDK
+EMQuantAPI_Python/
+
+# Trade orders (runtime files)
+advice.json
+advice.done.json
+
+# Debug screenshots
+*.png
+
+# Personal notes / scratch
+to consider.md
+claude opus4.6thought.md
+
+# Personal trading records
+交易记录.xlsx
+
+# Daily trade logs (personal trading journals)
+trade_log_*.md
+
+# Account sync file (personal positions/snapshots)
+SYNC.md
+
+# Class presentation files (personal)
+PPT_*.md
+
+# Strategy document (personal)
+ChoiceLab*.md
+
+# Agent task and result files (personal trading data)
+agentB/task_*.md
+agentB/result_*.md
+agentC/task_*.md
+agentC/result_*.md
+
+# Agent B output (screening results in competition context)
+agentB/output/
+
+# Temporary data scripts (contain local paths)
+scripts/get_data_agentB.*
+scripts/get_missing_metrics.py
+
+# Licensed and locally obtained market data (never distribute with this repository)
+data/RESSET/
+data/a_stock_list.json
+交易记录.xlsx

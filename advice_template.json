@@ -1,0 +1,54 @@
+{
+  "_instructions": [
+    "【AgentA 操作说明】",
+    "1. 将本文件复制为 advice.json（同目录，即项目根目录/advice.json）",
+    "2. 填写 sell / buy 列表，留空则传 []",
+    "3. 运行: cd new_trading_bot && python main.py --trade",
+    "4. 程序读取 advice.json → risk 护栏过滤 → 终端展示计划 → 输入 y 确认 → Playwright 自动下单",
+    "   （或 python main.py --trade --auto 跳过确认直接执行）",
+    "5. 执行成功后文件自动重命名为 advice.done.json，防止重复触发",
+    "",
+    "【buy 字段说明】",
+    "  code   : 6位股票代码",
+    "  name   : 股票名称（可选，仅用于展示）",
+    "  amount : 买入股数（必须是100的整数倍，科创板最少200股）",
+    "  price  : 限价（填写则发限价单；省略则 risk 模块自动取实时价）",
+    "  reason : 买入理由（AgentB 推荐摘要）",
+    "",
+    "【sell 字段说明】",
+    "  code   : 6位股票代码",
+    "  name   : 股票名称（可选）",
+    "  amount : 卖出股数；省略或设 0 = 全部可用股",
+    "  reason : 卖出理由",
+    "",
+    "【risk 护栏会自动拦截的情况】",
+    "  - 单只仓位超过总资产 33%",
+    "  - 总持仓超过 55%（现金不足 45%）",
+    "  - 可用现金不足 30%",
+    "  - 持仓数量超过 6 只",
+    "  - 买入股数不是 100 的整数倍",
+    "  - 创业板（30xxxx）/ 北交所（4/8/92xxxx）股票（默认禁止）"
+  ],
+  "sell": [
+    {
+      "_example": true,
+      "code": "000333",
+      "name": "美的集团",
+      "amount": 0,
+      "reason": "触发止损 -5.1%，无条件执行"
+    }
+  ],
+  "buy": [
+    {
+      "_example": true,
+      "code": "601138",
+      "name": "工业富联",
+      "amount": 900,
+      "price": 75.00,
+      "reason": "AgentB推荐：放量突破20日高点，RSI 62，空中加油形态"
+    }
+  ],
+  "reasoning": "【在此填写 AgentA 汇总决策摘要，100字以内】",
+  "agent_b_summary": "【可选：粘贴 AgentB 今日分析关键结论】",
+  "agent_c_warnings": "【可选：粘贴 AgentC 今日审计警告列表】"
+}
